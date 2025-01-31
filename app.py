@@ -162,7 +162,7 @@ def webhook():
 
 @app.route('/')
 def index():
-    return "yes"
+    return bot.get_webhook_info()
 
 # تشغيل البوت باستخدام Flask مع Webhook
 if __name__ == "__main__":
