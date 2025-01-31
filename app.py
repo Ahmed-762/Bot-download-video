@@ -10,7 +10,7 @@ from flask import Flask
 from keep_alive import keep_alive  # استيراد keep_alive.py
 
 # إدخال رمز التوكن الخاص بالبوت
-API_TOKEN = 'YOUR_BOT_TOKEN'
+API_TOKEN = '7513300809:AAEwpEteDLW3MyqxAafwq4LSC5qTmeKRPNs'
 
 # إنشاء البوت
 bot = telebot.TeleBot(API_TOKEN)
