@@ -6,7 +6,7 @@ import threading
 import validators
 import subprocess
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
-from flask import Flask
+from flask import Flask, request
 from keep_alive import keep_alive  # استيراد keep_alive.py
 
 # إدخال رمز التوكن الخاص بالبوت
@@ -152,17 +152,21 @@ def handle_video_quality(call):
         os.remove(video_path)
         os.remove(audio_path)
         os.remove(final_video_path)
-    else:
-        bot.send_message(chat_id, "❌ فشل في دمج الصوت مع الفيديو.")
+
+@app.route('/' + API_TOKEN, methods=['POST'])
+def webhook():
+    json_str = request.get_data().decode('UTF-8')
+    update = telebot.types.Update.de_json(json_str)
+    bot.process_new_updates([update])
+    return "!", 200
+
 @app.route('/')
 def index():
-    return"yes"
-# تشغيل البوت بشكل مستمر
-def run_bot():
-    bot.polling(none_stop=True)
+    return "yes"
 
-# تشغيل Flask في خيط منفصل
+# تشغيل البوت باستخدام Flask مع Webhook
 if __name__ == "__main__":
     keep_alive()  # حافظ على تشغيل Flask
-    bot_thread = threading.Thread(target=run_bot)
-    bot_thread.start()
+    bot.remove_webhook()
+    bot.set_webhook(url='https://bot-download-video-k6ovk41ec-ahmed-762s-projects.vercel.app/' + API_TOKEN)
+    app.run(host="0.0.0.0", port=5000)
