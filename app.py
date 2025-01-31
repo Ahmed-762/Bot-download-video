@@ -166,7 +166,7 @@ def index():
 
 # تشغيل البوت باستخدام Flask مع Webhook
 if __name__ == "__main__":
-    keep_alive()  # حافظ على تشغيل Flask
+     # حافظ على تشغيل Flask
     bot.remove_webhook()
     bot.set_webhook(url='https://bot-download-video-k6ovk41ec-ahmed-762s-projects.vercel.app/' + API_TOKEN)
     app.run(host="0.0.0.0", port=5000)
