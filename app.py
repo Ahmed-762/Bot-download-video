@@ -154,6 +154,7 @@ def handle_video_quality(call):
         os.remove(final_video_path)
     else:
         bot.send_message(chat_id, "❌ فشل في دمج الصوت مع الفيديو.")
+@app.route('/')
 def index():
     return"yes"
 # تشغيل البوت بشكل مستمر
